@@ -1,0 +1,50 @@
+import random
+
+class Character:
+    def __init__(self, name):
+        self.name = name
+        self._life = 3
+        self._score = 0
+
+    def kicked(self):
+        self._score += 10
+
+    def punched(self):
+        self._score += 5
+
+    def stabbed(self):
+        self._life -= 1
+
+    def displaylife(self):
+        return self._life
+
+    def displayscore(self):
+        return self._score
+
+player = Character("mario")
+opponent = Character("michael")
+
+while player.displaylife() > 0 and opponent.displaylife() > 0:
+    action = input("Select your action (kicked, punched, or stabbed): ")
+    if action == "kicked":
+        player.kicked()
+    elif action == "punched":
+        player.punched()
+    elif action == "stabbed":
+        player.stabbed()
+
+    opponent_action = random.choice(["kicked", "punched", "stabbed"])
+    if opponent_action == "kicked":
+        opponent.kicked()
+    elif opponent_action == "punched":
+        opponent.punched()
+    elif opponent_action == "stabbed":
+        opponent.stabbed()
+
+print("Final score:")
+print(f"{player.name}: {player.displayscore()} points, {player.displaylife()} lives")
+print(f"{opponent.name}: {opponent.displayscore()} points, {opponent.displaylife()} lives")
+if player.displaylife() > 0:
+    print(f"{player.name} wins!")
+else:
+    print(f"{opponent.name} wins!")
